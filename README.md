@@ -6,17 +6,23 @@ AWS account with permission to run Cloudformation(CF) and delpoy the instances c
 
 ## Deployment
 Launch the CF template via AWS Console or CLI
-**Parameters required**
-'''
+
+```
+# Deploy stack
 aws cloudformation create-stack \
---stack-name myteststack \
---template-body file://2-subnet-network.yaml \
+--stack-name <stack-name> \
+--template-body file://network/2-subnet-network.yaml \
 --parameters \
-ParameterKey=ProjectName,ParameterValue=test \
+ParameterKey=ProjectName,ParameterValue=<project-name> \
 ParameterKey=CidrPrefix,ParameterValue="10.10" \
 --on-failure DO_NOTHING \
---region ap-southeast-2
-'''
+--region <region>
+
+# Delete stack
+aws cloudformation delete-stack \
+--stack-name <stack-name>
+--region <region>
+```
 
 
 ## Versioning
