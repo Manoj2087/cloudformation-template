@@ -1,0 +1,59 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Deploy EC2 Fleet'
+
+#Build AWs resources
+Resources:
+  #Create a EC2 Launch template
+  EC2LaunchTemplate:
+    Type: AWS::EC2::LaunchTemplate
+    Properties: 
+      LaunchTemplateData: 
+        ImageId: ami-0970010f37c4f9c8d
+        TagSpecifications:
+          - ResourceType : instance
+            Tags: 
+              - Key: Name
+                Value: ec2-fleet
+          - ResourceType : volume
+            Tags: 
+              - Key: Name
+                Value: ec2-fleet                
+  
+  EC2Fleet:
+    Type: AWS::EC2::EC2Fleet
+    Properties: 
+      ExcessCapacityTerminationPolicy: termination
+      LaunchTemplateConfigs: 
+        - LaunchTemplateSpecification:
+            LaunchTemplateId: !Ref EC2LaunchTemplate
+            Version: !GetAtt EC2LaunchTemplate.LatestVersionNumber
+          Overrides:
+            - InstanceType: m5.large
+              Priority: 20
+            - InstanceType: c5.large
+              Priority: 100
+            - InstanceType: t3.large
+              Priority: 50
+      OnDemandOptions: 
+        AllocationStrategy: prioritized
+      ReplaceUnhealthyInstances: true
+      SpotOptions: 
+        AllocationStrategy: lowestPrice
+      TagSpecifications: 
+        - ResourceType : fleet
+          Tags: 
+            - Key: project
+              Value: ec2-fleet
+      TargetCapacitySpecification: 
+        DefaultTargetCapacityType: spot
+        OnDemandTargetCapacity: 0
+        SpotTargetCapacity: 3
+        TotalTargetCapacity: 3
+      TerminateInstancesWithExpiration: true
+      Type: maintain
+
+# Output
+Outputs:
+  StackName:
+    Description: 'Stack name'
+    Value: !Sub '${AWS::StackName}'
