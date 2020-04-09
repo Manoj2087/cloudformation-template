@@ -2,10 +2,10 @@
 Launch the CF template via AWS Console or CLI
 
 ```
-# Deploy stack
-aws cloudformation create-stack \
+# Deploy/update stack
+aws cloudformation deploy \
+--template-file ec2-fleet/c2-fleet.yml \
 --stack-name <stack-name> \
---template-body file://ec2-fleet/ec2-fleet.yaml \
 --region <region>
 
 # Delete stack

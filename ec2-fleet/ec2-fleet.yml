@@ -30,9 +30,7 @@ Resources:
           Overrides:
             - InstanceType: m5.large
               Priority: 20
-            - InstanceType: c5.large
-              Priority: 100
-            - InstanceType: t3.large
+            - InstanceType: r5.large
               Priority: 50
       OnDemandOptions: 
         AllocationStrategy: prioritized
