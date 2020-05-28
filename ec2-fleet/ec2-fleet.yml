@@ -31,7 +31,7 @@ Resources:
             - InstanceType: m5.large
               Priority: 20
             - InstanceType: r5.large
-              Priority: 50
+              Priority: 10
       OnDemandOptions: 
         AllocationStrategy: prioritized
       ReplaceUnhealthyInstances: true
@@ -44,8 +44,8 @@ Resources:
               Value: ec2-fleet
       TargetCapacitySpecification: 
         DefaultTargetCapacityType: spot
-        OnDemandTargetCapacity: 0
-        SpotTargetCapacity: 3
+        OnDemandTargetCapacity: 1
+        SpotTargetCapacity: 2
         TotalTargetCapacity: 3
       TerminateInstancesWithExpiration: true
       Type: maintain
