@@ -271,3 +271,18 @@ Outputs:
   StackName:
     Description: 'Stack name'
     Value: !Sub '${AWS::StackName}'
+  VPCId:
+    Description: 'VPC ID'
+    Value: !Ref VPC
+  PublicSubnetAId:
+    Description: 'Public Subnet A Id'
+    Value: !Ref PublicSubnetA
+  PublicSubnetBId:
+    Description: 'Public Subnet B Id'
+    Value: !Ref PublicSubnetB
+  PrivateSubnetAId:
+    Description: 'Private Subnet A Id'
+    Value: !Ref PrivateSubnetA
+  PrivateSubnetBId:
+    Description: 'Private Subnet B Id'
+    Value: !Ref PrivateSubnetB
