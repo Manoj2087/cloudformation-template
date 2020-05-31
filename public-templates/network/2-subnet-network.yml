@@ -286,3 +286,9 @@ Outputs:
   PrivateSubnetBId:
     Description: 'Private Subnet B Id'
     Value: !Ref PrivateSubnetB
+  PrivateRouteTableId:
+    Description: 'Private Route Table Id'
+    Value: !Ref PrivateRT
+  PublicRouteTableId:
+    Description: 'Public Route Table Id'
+    Value: !Ref PublicRT

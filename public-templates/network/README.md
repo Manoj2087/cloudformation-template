@@ -10,9 +10,10 @@ aws cloudformation deploy \
 ProjectName=<project-name> \
 CidrPrefixe="10.10" \
 --region <region>
-
+```
 
 # Delete stack
+```
 aws cloudformation delete-stack \
 --stack-name <stack-name> \
 --region <region>
