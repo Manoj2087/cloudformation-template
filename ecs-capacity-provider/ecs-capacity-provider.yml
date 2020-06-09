@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Deploy ECS Capcity provider'
+Metadata:
+  'AWS::CloudFormation::Interface':
+    ParameterGroups:
+    - Label:
+        default: 'Stack Inputs'
+      Parameters:
+      - ProjectName
+      - CidrPrefix
+#Input Parameters
+Parameters:
+  #Project Name
+  ProjectName:
+    Default: script
+    NoEcho: false
+    Description: Name of the Project to be used in Tags (1-8 char long)
+    Type: String
+    MinLength: 1
+    MaxLength: 8
+    AllowedPattern: "[a-zA-Z][a-zA-Z0-9]*"
+  #CidrPrefix
+  CidrPrefix:
+    Default: 10.200
+    NoEcho: false
+    Description: First 16 bit e.g. 10.200
+    Type: String
+
+#Build AWs resources
+Resources:
+  ECSCapcityProvider:
+    Type: 'Custom::ECSCapacityProvider'
+    Version: '1.0'
+    Properties:
+      ServiceToken: !ImportValue ECSCapacityProvider 
+      No1: '1'
+      No2: '3'
+  ASGEnableInstanceProtection:
+
+# Output
+Outputs:
+  StackName:
+    Description: 'Stack name'
+    Value: !Sub '${AWS::StackName}'
+  Sum:
+    Description: 'Sum'
+    Value: !GetAtt ECSCapcityProvider.Sum
